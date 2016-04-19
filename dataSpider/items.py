@@ -5,6 +5,8 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
+# 管道文件，接收item各字段对应数据，放到数据库或什么中……
+
 import scrapy
 
 # 定义在抓取网页内容中抽象出来的数据结构的定义，由于这里需要博客名称、发布日期、阅读量和评论量这四个字段，定义的Item结构如下：

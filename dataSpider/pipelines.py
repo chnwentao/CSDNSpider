@@ -17,7 +17,7 @@ class DataspiderPipeline(object):
 
     # 每个item pipeline组件都需要调用该方法，这个方法必须返回一个具有数据的dict，或是 Item (或任何继承类)对象， 或是抛出 DropItem 异常，被丢弃的item将不会被之后的pipeline组件所处理。
     def process_item(self, item, spider):
-        line = json.dumps(dict(item),ensure_ascii=False) + "\n" ##此处如果有中文的话，要加上ensure_ascii=False参数，否则可能出现乱码
+        line = json.dumps(dict(item),ensure_ascii=False) + "\n" #此处如果有中文的话，要加上ensure_ascii=False参数，否则可能出现乱码
         self.file.write(line)
         return item
 
