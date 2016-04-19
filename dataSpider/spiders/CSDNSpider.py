@@ -20,18 +20,13 @@ class CSDNSpider(CrawlSpider):
 
     #设置开始爬取页面
     start_urls = [
-        "http://blog.csdn.net/sjz4860402",
+        "http://blog.csdn.net/",
     ]
-
-    #rules = (
-    #    Rule(LinkExtractor(allow=('fengzheng/default.html\?page\=([\d]+)', ),),callback='parse_item',follow=True),
-    #)  #制定规则
-
 
     #减慢爬取速度 为2s
     download_delay = 2
 
-
+    #制定规则
     rules = (
 
         # 提取匹配 '/article/details/' 的链接并使用spider的parse_item方法进行分析
@@ -39,8 +34,7 @@ class CSDNSpider(CrawlSpider):
     )
 
     # 回调函数
-    # 用来处理Response对象，返回爬取的数据，并且获得更多等待爬取的链接。
-    # 默认的 request 得到 response 之后会调用这个回调函数，我们需要在这里对页面进行解析，返回两种结果（需要进一步 crawl 的链接和需要保存的数据）
+    # 接受一个response作为其第一个参数， 并返回一个包含 Item 以及(或) Request 对象(或者这两者的子类)的列表(list)。
     def parse_item (self, response):
 
         #获得文章url和标题

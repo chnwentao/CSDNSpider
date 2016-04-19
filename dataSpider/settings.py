@@ -9,11 +9,6 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'dataSpider'
-
-SPIDER_MODULES = ['dataSpider.spiders']
-NEWSPIDER_MODULE = 'dataSpider.spiders'
-
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'dataSpider (+http://www.yourdomain.com)'
@@ -29,12 +24,8 @@ NEWSPIDER_MODULE = 'dataSpider.spiders'
 #CONCURRENT_REQUESTS_PER_DOMAIN=16
 #CONCURRENT_REQUESTS_PER_IP=16
 
-# Disable cookies (enabled by default)
-#COOKIES_ENABLED=False
-
 # Disable Telnet Console (enabled by default)
-# #禁止cookies,防止被ban
-TELNETCONSOLE_ENABLED=False
+# TELNETCONSOLE_ENABLED=False
 
 # Override the default request headers:
 #DEFAULT_REQUEST_HEADERS = {
@@ -60,14 +51,6 @@ TELNETCONSOLE_ENABLED=False
 #    'scrapy.telnet.TelnetConsole': None,
 #}
 
-# Configure item pipelines
-# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'dataSpider.pipelines.DataspiderPipeline': 300, #执行顺序整数
-}
-
-USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'
-
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 # NOTE: AutoThrottle will honour the standard settings for concurrency and delay
@@ -86,3 +69,41 @@ USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7
 #HTTPCACHE_DIR='httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES=[]
 #HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+BOT_NAME = 'dataSpider'
+
+SPIDER_MODULES = ['dataSpider.spiders']
+NEWSPIDER_MODULE = 'dataSpider.spiders'
+
+# 广度优先
+DEPTH_PRIORITY = 1
+SCHEDULER_DISK_QUEUE = 'scrapy.squeue.PickleFifoDiskQueue'
+SCHEDULER_MEMORY_QUEUE = 'scrapy.squeue.FifoMemoryQueue'
+
+# Configure item pipelines
+# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+ITEM_PIPELINES = {
+    'dataSpider.pipelines.DataspiderPipeline': 300, #执行顺序整数
+}
+
+USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'
+
+
+# 通用爬虫设置
+# 增加全局并发数:
+CONCURRENT_REQUESTS = 100
+
+# 设置Log级别:
+LOG_LEVEL = 'INFO'
+
+# Disable cookies (enabled by default)
+COOKIES_ENABLED=False
+
+# 禁止重试:
+RETRY_ENABLED = False
+
+# 关闭重定向:
+REDIRECT_ENABLED = False
+
+
